@@ -643,6 +643,7 @@
                 taskModal.addEventListener('click', (e) => { if (e.target === taskModal) closeTaskModal(); });
                 deleteModal.addEventListener('click', (e) => { if (e.target === deleteModal) hideDeleteModal(); });
                 
+n
                 filterPriorityBtn.addEventListener('click', (e) => {
                     e.stopPropagation(); 
                     priorityFilterMenu.classList.toggle('hidden');
@@ -666,7 +667,7 @@
                     }
                 });
                 document.addEventListener('keydown', (e) => {
-                    if (e.key === "Escape") {
+ru                    if (e.key === "Escape") {
                         // Fecha o modal que estiver aberto, em ordem de prioridade
                         if (!taskModal.classList.contains('hidden')) {
                             closeTaskModal();
