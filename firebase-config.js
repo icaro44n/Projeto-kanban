@@ -13,6 +13,11 @@ const firebaseConfig = {
   appId: "SEU_APP_ID"
 };
 
+// Verifica se as credenciais do Firebase foram alteradas
+if (firebaseConfig.apiKey === "SUA_API_KEY") {
+  alert("Por favor, configure suas credenciais do Firebase no arquivo firebase-config.js");
+}
+
 // Inicializa o Firebase
 const app = initializeApp(firebaseConfig);
 // Exporta o serviço do Firestore para ser usado em outros arquivos
