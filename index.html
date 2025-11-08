@@ -654,7 +654,16 @@
                     }
                 });
                 document.addEventListener('keydown', (e) => {
-                    if (e.key === "Escape") closeFilterMenu();
+                    if (e.key === "Escape") {
+                        // Fecha o modal que estiver aberto, em ordem de prioridade
+                        if (!taskModal.classList.contains('hidden')) {
+                            closeTaskModal();
+                        } else if (!deleteModal.classList.contains('hidden')) {
+                            hideDeleteModal();
+                        } else if (!priorityFilterMenu.classList.contains('hidden')) {
+                            closeFilterMenu();
+                        }
+                    }
                 });
 
                 // --- 3. Autenticação e Carregamento de Dados ---
