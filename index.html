@@ -649,8 +649,6 @@
 
                 // Listeners globais para fechar modais/menus
                 document.addEventListener('click', (e) => {
-                    if (!priorityFilterMenu.classList.contains('hidden') && !priorityFilterMenu.contains(e.target) && e.target !== filterPriorityBtn && !filterPriorityBtn.contains(e.target)) {
-                        priorityFilterMenu.classList.add('hidden');
                     if (!priorityFilterMenu.contains(e.target) && !filterPriorityBtn.contains(e.target)) {
                         closeFilterMenu();
                     }
