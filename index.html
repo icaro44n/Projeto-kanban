@@ -563,19 +563,15 @@
                 // Tenta carregar a config do ambiente
                 let firebaseConfigJson = typeof __firebase_config !== 'undefined' ? __firebase_config : '{}';
                 
-                // *************** SUA VEZ ***************
-                // Se a config do ambiente não existir, use esta de fallback
-                // COLE O SEU OBJETO `firebaseConfig` AQUI:
+                // A configuração de fallback foi removida para evitar que credenciais
+                // sensíveis sejam acidentalmente enviadas para o controle de versão (Git).
+                // A configuração agora DEVE ser injetada através da variável global `__firebase_config`.
                 const fallbackConfig = {
-                    apiKey: "AIzaSyByV5NRKi9YfoODzsc7do5gzrx-HFqtuIo",
-                    authDomain: "robotic-heaven-467715-r5.firebaseapp.com",
-                    projectId: "robotic-heaven-467715-r5",
-                    storageBucket: "robotic-heaven-467715-r5.appspot.com",
-                    messagingSenderId: "640118381311",
-                    appId: "1:640118381311:web:b57207051dc19b4b6a4aca",
-                    measurementId: "G-565JEP2TK9"
+                    apiKey: "YOUR_API_KEY",
+                    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+                    projectId: "YOUR_PROJECT_ID",
+                    // ... etc
                 };
-                // ***************************************
 
                 let firebaseConfig;
                 try {
@@ -583,11 +579,11 @@
                      if (!firebaseConfig.apiKey) throw new Error("Config do ambiente vazia");
                 } catch(e) {
                     console.warn("Usando config de fallback. Cole a sua config do Firebase.");
-                    firebaseConfig = fallbackConfig;
+                    firebaseConfig = {}; // Usa um objeto vazio se a injeção falhar.
                 }
 
-                if (!firebaseConfig.apiKey || firebaseConfig.apiKey.includes("COLE_SUA_API_KEY")) {
-                    authStatus.textContent = "Erro: Configuração do Firebase não encontrada. Cole seu 'firebaseConfig' no script.";
+                if (!firebaseConfig.apiKey || firebaseConfig.apiKey.includes("YOUR_API_KEY")) {
+                    authStatus.textContent = "Erro: Configuração do Firebase não encontrada ou inválida.";
                     authStatus.classList.add('bg-red-700');
                     return;
                 }
