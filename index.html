@@ -374,6 +374,14 @@
                 taskToDeleteId = null;
             };
 
+            // NOVO: Funções para controlar o menu de filtro
+            const openFilterMenu = () => priorityFilterMenu.classList.remove('hidden');
+            const closeFilterMenu = () => priorityFilterMenu.classList.add('hidden');
+            const toggleFilterMenu = (e) => {
+                e.stopPropagation();
+                priorityFilterMenu.classList.toggle('hidden');
+            };
+
             // --- Funções do Board (Renderização) ---
 
             const createTaskElement = (task) => {
@@ -627,18 +635,28 @@
                     e.stopPropagation(); 
                     priorityFilterMenu.classList.toggle('hidden');
                 });
+                // Listeners do menu de filtro refatorados
+                filterPriorityBtn.addEventListener('click', toggleFilterMenu);
                 priorityFilterMenu.querySelectorAll('.filter-option-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         e.stopPropagation();
                         activePriorityFilter = btn.dataset.priority;
                         priorityFilterMenu.classList.add('hidden');
+                        closeFilterMenu();
                         renderBoard(); // Filtra o cache local
                     });
                 });
+
+                // Listeners globais para fechar modais/menus
                 document.addEventListener('click', (e) => {
                     if (!priorityFilterMenu.classList.contains('hidden') && !priorityFilterMenu.contains(e.target) && e.target !== filterPriorityBtn && !filterPriorityBtn.contains(e.target)) {
                         priorityFilterMenu.classList.add('hidden');
+                    if (!priorityFilterMenu.contains(e.target) && !filterPriorityBtn.contains(e.target)) {
+                        closeFilterMenu();
                     }
+                });
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === "Escape") closeFilterMenu();
                 });
 
                 // --- 3. Autenticação e Carregamento de Dados ---
