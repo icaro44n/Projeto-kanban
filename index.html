@@ -608,9 +608,21 @@
                 
                 // Inicializa o Firebase
                 try {
+                    // Inicializa o Firebase e registra a configuração para debug
+                    console.log('Firebase config (used to initialize):', firebaseConfig);
                     const app = initializeApp(firebaseConfig);
                     db = getFirestore(app);
                     auth = getAuth(app);
+                    // Tenta inicializar Analytics (não bloqueia se falhar)
+                    try {
+                        if (typeof getAnalytics === 'function') {
+                            const analyticsInstance = getAnalytics(app);
+                            console.log('Firebase Analytics inicializado', analyticsInstance);
+                            window._fb_analytics = analyticsInstance;
+                        }
+                    } catch (analyticsError) {
+                        console.warn('Falha ao inicializar Firebase Analytics:', analyticsError && analyticsError.message ? analyticsError.message : analyticsError);
+                    }
                     setLogLevel('Debug'); // Mostra logs detalhados do Firebase
                 } catch (error) {
                     console.error("Erro ao inicializar Firebase:", error);
@@ -712,7 +724,10 @@
                     console.log("Autenticação anônima realizada com sucesso");
                 } catch (error) {
                     console.error("Erro na autenticação:", error);
-                    authStatus.textContent = "Erro de autenticação: " + error.message;
+                    // Mostra código e mensagem mais detalhada ao usuário para diagnóstico
+                    const code = error.code || 'unknown';
+                    const message = error.message || String(error);
+                    authStatus.textContent = `Erro de autenticação (${code}): ${message}`;
                     authStatus.classList.add('bg-red-700');
                 }
             }
