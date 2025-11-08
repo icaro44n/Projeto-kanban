@@ -13,5 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "firebase": "^12.5.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
   }
 }

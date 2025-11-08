@@ -1,5 +1,4 @@
 # Projeto-kanban
-Projeto de PCM
 
 Um simples quadro Kanban (To Do, In Progress, Done) construído com HTML, CSS e JavaScript puro, utilizando o Firebase (Firestore) como banco de dados para persistência de dados em tempo real.
 
