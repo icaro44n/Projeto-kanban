@@ -672,15 +672,12 @@
 
                 // Tenta fazer o login
                 try {
-                    const authToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-                    if (authToken) {
-                        await signInWithCustomToken(auth, authToken);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
+                    await signInAnonymously(auth);
+                    console.log("Autenticação anônima realizada com sucesso");
                 } catch (error) {
                     console.error("Erro na autenticação:", error);
-                    authStatus.textContent = "Erro de autenticação. Verifique as regras do Firebase.";
+                    authStatus.textContent = "Erro de autenticação: " + error.message;
+                    authStatus.classList.add('bg-red-700');
                 }
             }
 
