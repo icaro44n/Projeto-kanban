@@ -480,8 +480,8 @@
                             return;
                         }
                         // Verifica se o ID já existe
-                        const docRef = doc(db, tasksCollectionRef.path, id);
-                        const docSnap = await getDoc(docRef); // Esta linha causava o erro
+                        const taskRef = doc(db, tasksCollectionRef.path, id);
+                        const docSnap = await getDoc(taskRef);
                         if (docSnap.exists()) {
                              modalErrorMessage.textContent = 'Este número de OS/SM já existe.';
                              return;
@@ -493,7 +493,7 @@
                             priority: priority,
                             column: 'col-restaurar'
                         };
-                        await setDoc(docRef, newTask);
+                        await setDoc(taskRef, newTask);
                     }
                     // Não precisamos mais chamar saveState() ou renderBoard()
                     // O onSnapshot vai detetar a mudança e re-renderizar
