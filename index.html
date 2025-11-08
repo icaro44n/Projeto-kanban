@@ -225,6 +225,20 @@
     </div>
 
 
+    <script>
+        // Coloque sua configuração do Firebase aqui.
+        // Substitua os valores de placeholder pelos valores reais do seu projeto.
+        // O app principal lê a variável global `__firebase_config` como uma string JSON.
+        window.__firebase_config = JSON.stringify({
+            apiKey: "COLE_SUA_API_KEY_AQUI",
+            authDomain: "SEU_PROJETO_ID.firebaseapp.com",
+            projectId: "SEU_PROJETO_ID",
+            storageBucket: "SEU_PROJETO_ID.appspot.com",
+            messagingSenderId: "SEU_SENDER_ID",
+            appId: "SEU_APP_ID"
+        });
+    </script>
+
     <script type="module">
         // Aguarda o DOM estar pronto e o SDK do Firebase estar carregado
         document.addEventListener('DOMContentLoaded', () => {
